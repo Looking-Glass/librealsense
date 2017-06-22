@@ -45,7 +45,10 @@ The project requires two external dependencies, *glfw* and *libusb-1.0*. The Cma
   The default build is set to produce the core shared object and unit-tests binaries
   * `cmake ../`<br />
   In order to build *librealsense* along with the demos and tutorials use<br />
-  * `cmake ../ -DBUILD_EXAMPLES=true`
+  * `cmake ../ -DBUILD_EXAMPLES=true`<br />
+  If you don't want to have build dependencies to OpenGL and X11, you can also<br />
+  build only the non-graphical examples:<br />
+  * `cmake ../ -DBUILD_EXAMPLES=true -DBUILD_GRAPHICAL_EXAMPLES=false`
 
   Generate and install binaries:<br />
   * `make && sudo make install`<br />
@@ -76,8 +79,11 @@ Next, build the patched module for the desired machine configuration.<br />
 
   * **Arch-based distributions**
     * You need to install the [base-devel](https://www.archlinux.org/groups/x86_64/base-devel/) package group.
-Then run the following script to patch the uvc module:
-    * `./scripts/patch-arch.sh`<br />
+    * You need to install the according linux-headers as well (i.e.: linux-lts-headers for the linux-lts kernel).<br />
+    Navigate to the scripts folder:
+    * `cd ./scripts/`<br />
+    Then run the following script to patch the uvc module:
+    * `./patch-arch.sh`<br />
 
 Check installation by examining the latest entries in kernel log:
   * `sudo dmesg | tail -n 50`<br />
